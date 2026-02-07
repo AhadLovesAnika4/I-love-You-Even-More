@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ahad ❤️ Anika</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(#ff758c,#ff7eb3);
+  color:white;
+  text-align:center;
+  overflow:hidden;
+}
+
+#lock, #main{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+#main{display:none;}
+
+input{
+  padding:12px;
+  border-radius:25px;
+  border:none;
+  outline:none;
+  text-align:center;
+  width:200px;
+}
+
+button{
+  padding:10px 18px;
+  border-radius:25px;
+  border:none;
+  background:#ff4d6d;
+  color:white;
+  cursor:pointer;
+  margin:6px;
+  font-size:14px;
+}
+
+.days{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+  margin:15px 0;
+}
+
+h1{
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow{
+  from{text-shadow:0 0 5px #fff;}
+  to{text-shadow:0 0 20px #ffb3c6;}
+}
+
+/* Typing text */
+#dayText{
+  max-width:320px;
+  font-size:16px;
+  min-height:60px;
+}
+
+/* Slideshow */
+.slideshow{
+  width:260px;
+  margin:15px auto;
+}
+
+.slideshow img{
+  width:100%;
+  height:300px;
+  object-fit:cover;
+  border-radius:20px;
+  display:none;
+  box-shadow:0 0 20px rgba(255,0,100,0.6);
+}
+
+.slideshow img.active{display:block;}
+
+/* Falling animation */
+.fall{
+  position:fixed;
+  top:-50px;
+  font-size:22px;
+  animation: fall linear infinite;
+  opacity:0.9;
+}
+
+@keyframes fall{
+  0%{transform:translateY(0) rotate(0deg);}
+  100%{transform:translateY(110vh) rotate(360deg);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔒 LOCK -->
+<div id="lock">
+  <h1>🔒 For Anika</h1>
+  <p>Enter the password 💖</p>
+  <input type="password" id="pass" placeholder="Password">
+  <br><br>
+  <button onclick="checkPass()">Unlock</button>
+</div>
+
+<!-- ❤️ MAIN -->
+<div id="main">
+  <h1>Ahad ❤️ Anika</h1>
+
+  <div class="days">
+    <button onclick="setDay('rose')">🌹 Rose</button>
+    <button onclick="setDay('chocolate')">🍫 Chocolate</button>
+    <button onclick="setDay('promise')">🤞 Promise</button>
+    <button onclick="setDay('hug')">🤗 Hug</button>
+    <button onclick="setDay('kiss')">💋 Kiss</button>
+    <button onclick="setDay('valentine')">❤️ Valentine</button>
+  </div>
+
+  <h2 id="dayTitle">🌹 Rose Day</h2>
+  <p id="dayText"></p>
+
+  <div class="slideshow">
+    <img src="photo1.png" class="active">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
+  </div>
+
+  <!-- 🎵 BACKGROUND MUSIC -->
+  <audio id="bgm" autoplay loop>
+    <source src="music.mp3">
+  </audio>
+
+  <!-- 🎤 VOICE -->
+  <audio id="voice">
+    <source src="voice.mp3.aac">
+  </audio>
+  <button onclick="document.getElementById('voice').play()">▶ Voice Message</button>
+</div>
+
+<script>
+/* PASSWORD */
+function checkPass(){
+  if(document.getElementById("pass").value==="Anika"){
+    document.getElementById("lock").style.display="none";
+    document.getElementById("main").style.display="flex";
+    setDay("rose");
+  }else{
+    alert("Wrong password 💔");
+  }
+}
+
+/* TYPING EFFECT */
+function typeText(text){
+  let i=0;
+  const el=document.getElementById("dayText");
+  el.innerHTML="";
+  const timer=setInterval(()=>{
+    el.innerHTML+=text.charAt(i);
+    i++;
+    if(i>=text.length) clearInterval(timer);
+  },40);
+}
+
+/* DAY THEMES */
+function setDay(day){
+  const title=document.getElementById("dayTitle");
+  if(day==="rose"){
+    title.innerHTML="🌹 Rose Day";
+    typeText("Ei golap ta tomar moto shundor na, Anika… kintu amar puro mon-ta tomar jonno 🌹");
+    document.body.style.background="linear-gradient(#ff758c,#ff7eb3)";
+  }
+  if(day==="chocolate"){
+    title.innerHTML="🍫 Chocolate Day";
+    typeText("Tumi ashar age jibon ta feeka chilo… tumi eshe shobkichu mishti kore dile 🍫🤎");
+    document.body.style.background="linear-gradient(#5a2d0c,#8b4513)";
+  }
+  if(day==="promise"){
+    title.innerHTML="🤞 Promise Day";
+    typeText("Ami promise kori— bhalo din, kharap din, shobshomoy ami tomar pashei thakbo 🤍");
+    document.body.style.background="linear-gradient(#3a7bd5,#3a6073)";
+  }
+  if(day==="hug"){
+    title.innerHTML="🤗 Hug Day";
+    typeText("Ekta hug diye jodi tomar shob tension chole jeto, ami shara jibon tomake hug kore rakhtam 🤗");
+    document.body.style.background="linear-gradient(#ff9966,#ff5e62)";
+  }
+  if(day==="kiss"){
+    title.innerHTML="💋 Kiss Day";
+    typeText("Ei kiss ta shudhu romantic na, eta amar bhalobashar chinho 💋");
+    document.body.style.background="linear-gradient(#c31432,#240b36)";
+  }
+  if(day==="valentine"){
+    title.innerHTML="❤️ Valentine’s Day";
+    typeText("Anika, tumi shudhu amar Valentine na— tumi amar aaj, amar kal, amar shobkichu ❤️");
+    document.body.style.background="linear-gradient(#ff416c,#ff4b2b)";
+  }
+}
+
+/* SLIDESHOW */
+let slides=document.querySelectorAll(".slideshow img");
+let i=0;
+setInterval(()=>{
+  slides[i].classList.remove("active");
+  i=(i+1)%slides.length;
+  slides[i].classList.add("active");
+},3000);
+
+/* FALLING ROSES & HEARTS */
+function createFall(){
+  const f=document.createElement("div");
+  f.className="fall";
+  f.innerHTML=["🌹","❤️","💖","🌸"][Math.floor(Math.random()*4)];
+  f.style.left=Math.random()*100+"vw";
+  f.style.animationDuration=(3+Math.random()*4)+"s";
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),7000);
+}
+setInterval(createFall,400);
+</script>
+
+</body>
+</html>
